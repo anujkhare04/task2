@@ -6,25 +6,12 @@ const userschema = mongoose.Schema(
   {
     email: {
       type: String,
+      unique:true
     },
-
-    phoneNumber: {
-      type: Number,
+    
+    name:{
+       type: String,
       required: true,
-    },
-
-    fullname: {
-      firstname: {
-        type: String,
-        required: true,
-      },
-      middlename: {
-        type: String,
-      },
-      lastname: {
-        type: String,
-        required: true,
-      },
     },
 
     password: {

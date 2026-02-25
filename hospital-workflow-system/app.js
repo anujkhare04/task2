@@ -1,11 +1,12 @@
 const express =require('express')
-const cors = require('cors');
+const cookieParser=require('cookie-parser')
 const app=express()
 const authroutes = require('./src/routes/Auth Routes');
+const errorHandler=require('./src/middleware/errorMiddleware')
 
 app.use(express.json());
-
-// app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
     
 
@@ -15,6 +16,7 @@ app.use('/api/auth', authroutes);
 // app.use('/api/request', authroutes);
 
 
+app.use(errorHandler);
 
 
 

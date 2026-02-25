@@ -3,7 +3,7 @@ const authService=require('../services/Auth Service')
 
 const registerController = async (req, res, next) => {
   try {
-    const result = await authService.register(req.body);
+    const result = await authService.register(req);
 
     res.status(200).json({
       success: true,
@@ -11,18 +11,21 @@ const registerController = async (req, res, next) => {
     });
   
   } catch (error) {
+
     next(error);
   }
 };
 
  const loginController = async (req, res, next) => {
   try {
-    const result = await authService.login(req.body);
-
+    const result = await authService.login(req);
+     
     res.status(200).json({
       success: true,
       data: result
     });
+
+    
   
   } catch (error) {
     next(error);
@@ -32,11 +35,12 @@ const registerController = async (req, res, next) => {
 
  const logoutController = async (req, res, next) => {
   try {
-    const result = await authService.logout(req.body);
+
+    // here not need to logout because we not using frontend 
 
     res.status(200).json({
       success: true,
-      data: result
+      message: "Logged out successfully"
     });
   
   } catch (error) {
@@ -46,7 +50,7 @@ const registerController = async (req, res, next) => {
 
   const profileController = async (req, res, next) => {
   try {
-    const result = await authService.profile(req.body);
+    const result = await authService.profile(req);
 
     res.status(200).json({
       success: true,

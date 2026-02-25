@@ -149,7 +149,7 @@ steps [
 • GET /api/request/:id
 • GET /api/department/:name/queue
 
-11. How To Run Locally
+11. How To Run Locally   // remain
 
 
 1. Clone repository
@@ -168,6 +168,12 @@ steps [
 
 6. Start server
    npm run dev
+
+7.  For login as Admin (It is created on starting server automatically)
+
+   Email: admin@hospital.com
+   Password: admin123
+
 
 
 
