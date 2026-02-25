@@ -42,6 +42,7 @@ This system introduces a structured backend workflow engine that automates reque
 
 Create a backend system that routes patient queries or requests across hospital departments using defined workflows. The solution should track movement, status, and progress of requests.
 
+
 # Hospitals face the following challenges:
 
 • No centralized tracking of patient requests
@@ -176,6 +177,8 @@ steps [
 
 Registration
 ↓
+Radiology (In Progress → Done)
+↓
 Billing (Payment Pending → Paid)
 ↓
 Radiology (In Progress → Done)
@@ -243,4 +246,4 @@ REST API Design Principles -- link
 MongoDB Official Documentation --
 Express.js Documentation --
 JWT Authentication Guide --
-Hospital Workflow Research Papers --
+

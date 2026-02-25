@@ -1,7 +1,7 @@
 const authService=require('../services/Auth Service')
 
 
-export const registerController = async (req, res, next) => {
+const registerController = async (req, res, next) => {
   try {
     const result = await authService.register(req.body);
 
@@ -15,7 +15,7 @@ export const registerController = async (req, res, next) => {
   }
 };
 
-export const loginController = async (req, res, next) => {
+ const loginController = async (req, res, next) => {
   try {
     const result = await authService.login(req.body);
 
@@ -30,7 +30,7 @@ export const loginController = async (req, res, next) => {
 };
 
 
-export const logoutController = async (req, res, next) => {
+ const logoutController = async (req, res, next) => {
   try {
     const result = await authService.logout(req.body);
 
@@ -44,7 +44,7 @@ export const logoutController = async (req, res, next) => {
   }
 };
 
-export const profileController = async (req, res, next) => {
+  const profileController = async (req, res, next) => {
   try {
     const result = await authService.profile(req.body);
 
@@ -56,4 +56,11 @@ export const profileController = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+module.exports = {
+  registerController,
+  loginController,
+  logoutController,
+  profileController
 };

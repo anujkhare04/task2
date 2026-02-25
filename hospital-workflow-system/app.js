@@ -1,19 +1,19 @@
 const express =require('express')
 const cors = require('cors');
 const app=express()
-
-
-
-
 const authroutes = require('./src/routes/Auth Routes');
 
 app.use(express.json());
 
 // app.use(cookieParser());
 
-
+    
 
 app.use('/api/auth', authroutes);
+
+// app.use('/api/patience', authroutes);
+// app.use('/api/request', authroutes);
+
 
 
 

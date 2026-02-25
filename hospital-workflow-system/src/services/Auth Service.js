@@ -2,16 +2,49 @@ const usermodel=require('../models/user')
 
 
 
-export const register = async () => {
+ const register = async () => {
+   
+
+
+
+
+
+
+
 
   
 };
 
-export const login = async () => {
+ const login = async () => {
+
+
+
+
+
+
+
 
   
 };
-export const logout = async () => {
+ const logout = async () => {
+  
+
+
 
   
 };
+ const profile = async () => {
+
+
+
+
+
+
+
+
+
+
+  
+};
+
+module.exports = { register, login, logout, profile };

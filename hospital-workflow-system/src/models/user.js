@@ -52,6 +52,6 @@ department: {
   },
 );
 
-const usermodel = userschema.model("usermodel", userschema);
+const usermodel = mongoose.model("usermodel", userschema);
 
 module.exports = usermodel;
