@@ -1,0 +1,1 @@
+// GET /departments/:name/queue
