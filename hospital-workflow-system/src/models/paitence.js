@@ -1,9 +1,41 @@
-// Stores patient details.
 
-// name
+const mongoose = require("mongoose");
 
-// phone
+const patienceschema = mongoose.Schema(
+  {
+    fullname: {
+      firstname: {
+        type: String,
+        required: true,
+      },
+      middlename: {
+        type: String,
+      },
+      lastname: {
+        type: String,
+        required: true,
+      },
+    },
 
-// age
+    phone: {
+      type:String,
+      required: true,
+    },
+    age:{
+      type: Number,
+      required: true,
+    },
+    gender: {
+      type: String,
+      enum: ["Male", "Female", "Other"],
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  },
+);
 
-// gender
+const patiencemodel = mongoose.model("patience", patienceschema);
+
+module.exports = patiencemodel;

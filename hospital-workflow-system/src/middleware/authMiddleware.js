@@ -11,7 +11,7 @@ const AuthMiddleware=async(req,res,next)=>{
 
         if(!authHeader || ! authHeader.startsWith("Bearer ")){
             return res.status(401).json({
-                sucess:false,
+                success:false,
                 message:"No token found"
             })
         }

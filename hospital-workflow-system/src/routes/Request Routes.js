@@ -1,11 +1,35 @@
-// Request Routes (4 routes)
 
-// POST /requests
+const express=require('express')
+const router=express.Router()
+const authMiddleware=require("../middleware/authMiddleware")
+const departmentMiddleware=require("../middleware/departmentMidlleware")
+const {
+   createRequestController,
+  getAllRequestsController,
+  getRequestByIdController,
+  updateRequestController,
+} = require("../controllers/requestController");
 
-// GET /requests/:id
+router.post(
+  "/requests",
+  authMiddleware,
+  departmentMiddleware(["Registration department"]),
+  createRequestController
+)
+router.get("/viewrequest",authMiddleware,getAllRequestsController)
 
-// PATCH /requests/:id/status
 
-// GET /requests
+router.get("/viewrequest/:id",authMiddleware,getRequestByIdController)
 
-// (Main workflow logic lives here)
+
+router.patch(
+  "/updaterequest/:id",
+  authMiddleware,
+  departmentMiddleware(["Registration department"]),
+  updateRequestController
+)
+
+
+
+module.exports=router
+

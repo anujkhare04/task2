@@ -1,9 +1,37 @@
-requestId
+const mongoose = require("mongoose");
 
-department
+const requestHistorySchema = new mongoose.Schema(
+  {
+    requestId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Request",
+      required: true
+    },
 
-status
+    department: {
+      type: String,
+      required: true
+    },
 
-updatedBy
+    action: {
+      type: String,
+      required: true
+    },
 
-timestamp
+    status: {
+      type: String,
+      required: true
+    },
+
+    updatedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "usermodel",
+      required: true
+    }
+  },
+  {
+    timestamps: true 
+  }
+);
+
+module.exports = mongoose.model("RequestHistory", requestHistorySchema);

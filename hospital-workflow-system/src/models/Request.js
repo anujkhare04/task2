@@ -1,11 +1,85 @@
-patientId
+const mongoose = require("mongoose");
 
-type
+const requestSchema = new mongoose.Schema(
+  {
+    
+    patientId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "patience",
+      required: true
+    },
 
-currentDepartment
+    type: {
+      type: String,
+      required: true,
+      enum: ["MRI"] 
+    },
 
-currentStep
+  
+    steps: {
+      type: [String],
+      required: true
+    },
 
-status
+    currentStep: {
+      type: Number,
+      default: 1
+    },
 
-createdAt
+    currentDepartment: {
+      type: String,
+      required: true
+    },
+
+    status: {
+      type: String,
+      enum: [
+        "PENDING_APPROVAL",
+        "APPROVED",
+        "IN_PROGRESS",
+        "READY_FOR_REPORT",
+        "CLOSED"
+      ],
+      default: "PENDING_APPROVAL"
+    },
+
+   
+    paymentStatus: {
+      type: String,
+      enum: ["PENDING", "PAID"],
+      default: "PENDING"
+    },
+
+    paymentAmount: {
+      type: Number
+    },
+
+    paidAt: {
+      type: Date
+    },
+
+    paidBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "usermodel"
+    },
+
+    
+    reportText: {
+      type: String
+    },
+
+    completedAt: {
+      type: Date
+    },
+
+    completedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "usermodel"
+    }
+  },
+  {
+    timestamps: true
+  }
+);
+
+module.exports = mongoose.model("Request", requestSchema);

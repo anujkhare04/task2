@@ -27,7 +27,7 @@ const userschema = mongoose.Schema(
 
 department: {
   type: String,
-  enum: ["Registration", "Radiology", "Billing", "Reports"],
+  enum: ["Registration department", "Radiology department", "Billing department", "Reports department"],
   required: function () {
     return this.role === "STAFF";
   }
