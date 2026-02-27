@@ -74,7 +74,7 @@ There is a need for a structured workflow-based backend system that ensures tran
 5.All transitions are logged in request history.
 6.The request is marked completed once final step finishes.
 
-6. Architecture Diagram
+6. Architecture Diagram    /// remain
 
 # Layers:
 
@@ -118,7 +118,7 @@ There is a need for a structured workflow-based backend system that ensures tran
 • departmentId
 • name
 
-# Workflows
+# Workflows                       
 
 • type (MRI, Blood Test)
 steps [
@@ -177,7 +177,7 @@ steps [
 
 
 
-12. Working Flow
+12. Working Flow     // remain
 
 # Example: For MRI Request
 
@@ -193,7 +193,7 @@ Report Desk (Generated)
 ↓
 Completed
 
-13. Implementation Details
+13. Implementation Details   // remain 
 
 # Backend modules:
 
