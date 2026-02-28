@@ -12,6 +12,11 @@ const departmentMiddleware = (allowedDepartments) => {
       });
     }
 
+    // Allow global ADMIN to bypass department restrictions
+    if (req.user.role === "ADMIN") {
+      return next();
+    }
+
     if (!allowed.includes(req.user.department)) {
       return res.status(403).json({
         success: false,

@@ -5,6 +5,14 @@ const registerController = async (req, res, next) => {
   try {
     const result = await authService.register(req);
 
+    // set httpOnly cookie so cookie-parser can read it in subsequent requests
+    res.cookie("token", result.token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
     res.status(200).json({
       success: true,
       data: result
@@ -20,10 +28,19 @@ const registerController = async (req, res, next) => {
   try {
     const result = await authService.login(req);
      
+    res.cookie("token", result.token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
     res.status(200).json({
       success: true,
       data: result
     });
+
+    
 
     
   

@@ -47,9 +47,51 @@ const viewAllPatient = async (req, res, next) => {
   }
 };
 
+const getPatientById = async (req, res, next) => {
+  try {
+    const result = await patientService.viewPatientById(req.params.id);
+
+    res.status(200).json({
+      success: true,
+      data: result
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updatePatientController = async (req, res, next) => {
+  try {
+    const result = await patientService.updatePatient(req.params.id, req.body);
+
+    res.status(200).json({
+      success: true,
+      data: result
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deletePatientController = async (req, res, next) => {
+  try {
+    const result = await patientService.deletePatient(req.params.id);
+
+    res.status(200).json({
+      success: true,
+      data: result
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports={
     createPatientController,
     getPatient,
-    viewAllPatient
+    viewAllPatient,
+    getPatientById,
+    updatePatientController,
+    deletePatientController
     
 }
