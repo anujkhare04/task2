@@ -14,8 +14,7 @@ const requestSchema = new mongoose.Schema(
       required: true,
       enum: ["MRI"] 
     },
-
-  
+    
     steps: {
       type: [String],
       required: true
@@ -28,7 +27,8 @@ const requestSchema = new mongoose.Schema(
 
     currentDepartment: {
       type: String,
-      required: true
+      required: true,
+      default:null
     },
 
     status: {
@@ -36,8 +36,10 @@ const requestSchema = new mongoose.Schema(
       enum: [
         "PENDING_APPROVAL",
         "APPROVED",
+        "WAITING FOR PAY",
         "IN_PROGRESS",
-        "READY_FOR_REPORT",
+        "COMPLETE/READY_FOR_REPORT",
+        "REPORT_GENERATED",
         "CLOSED"
       ],
       default: "PENDING_APPROVAL"

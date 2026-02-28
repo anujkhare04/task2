@@ -7,6 +7,15 @@ const historyService=require("../services/historyService")
 const normalizeDepartment = (value) =>
   String(value || "").toLowerCase().replace(/[^a-z\s]/g, "").trim();
 
+const toRequestSummary = (item) => ({
+  _id: item._id,
+  patientId: item.patientId,
+  type: item.type,
+  currentDepartment: item.currentDepartment,
+  status: item.status,
+  paymentStatus: item.paymentStatus
+});
+
 const createRequest = async (data, user) => {
   const { patientId, type } = data;
 
@@ -47,55 +56,33 @@ const createRequest = async (data, user) => {
     user._id,
   );
 
-  return newRequest;
+  return {
+    patientId: newRequest.patientId,
+    type: newRequest.type,
+    currentDepartment: newRequest.currentDepartment,
+    status: newRequest.status,
+    paymentStatus: newRequest.paymentStatus
+  };
 };
 
 
 const getAllRequests = async (user) => {
 
-  if (user.role === "ADMIN") {
-    return await Request.find().populate("patientId");
-  }
 
-  const allRequests = await Request.find().populate("patientId");
-  return allRequests.filter(
-    (item) =>
-      normalizeDepartment(item.currentDepartment) ===
-      normalizeDepartment(user.department)
-  );
+  const allRequests = await Request.find();
+
+
+  return allRequests
+    .filter(
+      (item) =>
+        normalizeDepartment(item.currentDepartment) ===
+        normalizeDepartment(user.department)
+    )
+    .map(toRequestSummary);
 };
 
 
-const updateRequest = async (id, data, user) => {
 
-  const request = await Request.findById(id);
-  if (!request) throw new ApiError("Request not found", 404);
-
-  if (
-    user.role !== "ADMIN" &&
-    normalizeDepartment(user.department) !==
-      normalizeDepartment(request.currentDepartment)
-  ) {
-    throw new ApiError("Not allowed to update this request", 403);
-  }
-
-  
-  if (data.status) {
-    request.status = data.status;
-  }
-
-  await request.save();
-
-  await historyService.logHistory(
-    request._id,
-    user.department,
-    "STATUS_UPDATED",
-    request.status,
-    user._id
-  );
-
-  return request;
-};
 
 const getRequestById = async (id, user) => {
 
@@ -110,14 +97,14 @@ const getRequestById = async (id, user) => {
     throw new ApiError("Access denied", 403);
   }
 
-  return request;
+  return toRequestSummary(request);
 };
 
 module.exports = {
   createRequest,
   getAllRequests,
   getRequestById,
-  updateRequest
+ 
 };
 
 

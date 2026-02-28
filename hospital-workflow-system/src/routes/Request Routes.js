@@ -7,11 +7,11 @@ const {
    createRequestController,
   getAllRequestsController,
   getRequestByIdController,
-  updateRequestController,
+
 } = require("../controllers/requestController");
 
 router.post(
-  "/requests",
+  "/Createrequests",
   authMiddleware,
   departmentMiddleware(["Registration department"]),
   createRequestController
@@ -20,15 +20,6 @@ router.get("/viewrequest",authMiddleware,getAllRequestsController)
 
 
 router.get("/viewrequest/:id",authMiddleware,getRequestByIdController)
-
-
-router.patch(
-  "/updaterequest/:id",
-  authMiddleware,
-  departmentMiddleware(["Registration department"]),
-  updateRequestController
-)
-
 
 
 module.exports=router

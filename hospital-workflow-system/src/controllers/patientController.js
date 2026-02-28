@@ -19,7 +19,22 @@ const createPatientController = async (req, res, next) => {
 
 const getPatient= async (req, res, next) => {
   try {
-    const result = await patientService.viewPatient(req.params.id, req.user);
+    const result = await patientService.viewPatient(req.params.phone);
+
+    res.status(200).json({
+      success: true,
+      data: result
+    });
+  
+  } catch (error) {
+
+    next(error);
+  }
+};
+
+const viewAllPatient = async (req, res, next) => {
+  try {
+    const result = await patientService.viewAllPatient ();
 
     res.status(200).json({
       success: true,
@@ -34,6 +49,7 @@ const getPatient= async (req, res, next) => {
 
 module.exports={
     createPatientController,
-    getPatient
+    getPatient,
+    viewAllPatient
     
 }

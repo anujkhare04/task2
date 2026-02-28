@@ -78,12 +78,12 @@ There is a need for a structured workflow-based backend system that ensures tran
 
 # Layers:
 
-
 • API Layer (Express Controllers)
 
 • Service Layer (Workflow Logic)
 
 • Database Layer (MongoDB)
+
 
 7. Features
 
@@ -173,7 +173,7 @@ steps [
 
    Email: admin@hospital.com
    Password: admin123
-
+   
 
 
 
@@ -183,13 +183,13 @@ steps [
 
 Registration
 ↓
-Radiology (In Progress → Done)
+Radiology (In Progress → Done)   /// view update 
 ↓
-Billing (Payment Pending → Paid)
+Billing (Payment Pending → Paid)  /// 
 ↓
-Radiology (In Progress → Done)
+Radiology (In Progress → Done)     ///
 ↓
-Report Desk (Generated)
+Report Desk (Generated)           ///  
 ↓
 Completed
 

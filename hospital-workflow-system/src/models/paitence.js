@@ -1,8 +1,7 @@
-
 const mongoose = require("mongoose");
 
 const patienceschema = mongoose.Schema(
-  {
+  {  
     fullname: {
       firstname: {
         type: String,
@@ -39,3 +38,4 @@ const patienceschema = mongoose.Schema(
 const patiencemodel = mongoose.model("patience", patienceschema);
 
 module.exports = patiencemodel;
+

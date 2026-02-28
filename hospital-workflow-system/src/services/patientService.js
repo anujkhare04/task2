@@ -40,19 +40,27 @@ const createPatient = async (req) => {
   return newPatient;
 };
 
-const viewPatient = async (patientId, user) => {
-
-  const patient = await Patient.findById(patientId);
-
-  if (!patient) {
-    throw new ApiError("Patient not found", 404);
-  }
-
+const viewPatient = async (phone) => {
+  const patient = await Patient.findOne({ phone });
+  if (!patient) throw new ApiError("Patient not found", 404);
   return patient;
 };
 
+
+const viewAllPatient = async () => {
+  const patients = await Patient.find();
+
+  if (patients.length === 0) {
+    throw new ApiError("No patients found", 404);
+  }
+
+  return patients;
+};
+
+
 module.exports={
     createPatient,
-    viewPatient
+    viewPatient,
+    viewAllPatient 
 }
 

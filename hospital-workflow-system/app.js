@@ -6,6 +6,9 @@ const errorHandler=require('./src/middleware/errorMiddleware')
 const patienceroutes=require('./src/routes/Patient Routes')
 const requestroutes=require('./src/routes/Request Routes')
 const historyroutes=require('./src/routes/historyRoutes')
+const radiologyroutes=require('./src/routes/radiologyRoutes')
+const billingroutes=require("./src/routes/billingRoutes")
+const reportroutes=require("./src/routes/reportsRoutes")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -15,9 +18,14 @@ app.use(cookieParser());
 
 app.use('/api/auth', authroutes);
 app.use('/api/patient',patienceroutes);
-app.use('/api/patience',patienceroutes);
+
 app.use('/api/request',requestroutes); 
 app.use('/api/history',historyroutes);
+
+app.use('/api/radiology',radiologyroutes)
+app.use('/api/billing',billingroutes)
+app.use('/api/report',reportroutes)
+     
 
 // for checking
 

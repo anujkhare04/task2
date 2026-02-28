@@ -3,11 +3,39 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const ApiError = require("../utils/ApiError");
 
+const ALLOWED_DEPARTMENTS = [
+  "Registration department",
+  "Radiology department",
+  "Billing department",
+  "Reports department"
+];
+
 const register = async (req) => {
+
   const { email, password, name, role, department } = req.body;
 
   if (!email || !password || !name || !role) {
     throw new ApiError("Missing required fields", 400);
+  }
+
+  const admin = req.isAdmin === true;
+
+  if (!admin && role === "ADMIN") {
+    throw new ApiError("Only one Admin can register", 400);
+  }
+
+if (!admin && role !== "STAFF") {
+  throw new ApiError("Only STAFF can be registered by admin", 400);
+}
+
+
+  if (role === "STAFF") {
+    if (!department) {
+      throw new ApiError("Department is required for STAFF", 400);
+    }
+    if (!ALLOWED_DEPARTMENTS.includes(department)) {
+      throw new ApiError("Invalid department", 400);
+    }
   }
 
   const user = await usermodel.findOne({ email });
@@ -17,6 +45,9 @@ const register = async (req) => {
 
   const hash = await bcrypt.hash(password, 10);
 
+  
+  
+
   const Newuser = await usermodel.create({
     name,
     email,
@@ -25,7 +56,21 @@ const register = async (req) => {
     department: role === "STAFF" ? department : null
   });
 
+  let token;
+  if (Newuser.role === "ADMIN") {
+    token = jwt.sign(
+      {
+        id: Newuser._id,
+        role: Newuser.role,
+        department: Newuser.department
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+  }
+
   return {
+    token,
     id: Newuser.id,
     name: Newuser.name,
     email: Newuser.email,
