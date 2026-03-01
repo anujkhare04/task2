@@ -28,7 +28,7 @@ app.use("/api/admin", adminroutes);
 
 // for checking
 
-app.get("/api/health", (req, res) =>
+app.get("/api/health", (req, res) =>git branch -a
   res.status(200).json({ status: "ok", message: "Backend is live" }),
 );
 app.use("/api", (req, res) => {
