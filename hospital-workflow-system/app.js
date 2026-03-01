@@ -10,6 +10,7 @@ const radiologyroutes = require("./src/routes/radiologyRoutes");
 const billingroutes = require("./src/routes/billingRoutes");
 const reportroutes = require("./src/routes/reportsRoutes");
 const adminroutes = require("./src/routes/adminRoutes");
+const departmentRoutes = require("./src/routes/departmentRoutes");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -25,6 +26,7 @@ app.use("/api/radiology", radiologyroutes);
 app.use("/api/billing", billingroutes);
 app.use("/api/report", reportroutes);
 app.use("/api/admin", adminroutes);
+app.use("/api/department", departmentRoutes);
 
 // for checking
 

@@ -12,35 +12,10 @@ const ALLOWED_DEPARTMENTS = [
 
 // ================= REGISTER =================
 const register = async (req) => {
-  const { email, password, name, role, department } = req.body;
+  const { email, password, name } = req.body;
 
-  if (!email || !password || !name || !role) {
+  if (!email || !password || !name ) {
     throw new ApiError("Missing required fields", 400);
-  }
-
-  // Check if first admin
-  if (role === "ADMIN") {
-    const adminExists = await usermodel.findOne({ role: "ADMIN" });
-    if (adminExists) {
-      throw new ApiError("Only one Admin is allowed", 400);
-    }
-  }
-
-  // If not first admin → only admin can create users
-  if (role !== "ADMIN") {
-    if (!req.user || req.user.role !== "ADMIN") {
-      throw new ApiError("Only Admin can register STAFF", 403);
-    }
-  }
-
-  if (role === "STAFF") {
-    if (!department) {
-      throw new ApiError("Department is required for STAFF", 400);
-    }
-
-    if (!ALLOWED_DEPARTMENTS.includes(department)) {
-      throw new ApiError("Invalid department", 400);
-    }
   }
 
   const existingUser = await usermodel.findOne({ email });
@@ -54,8 +29,6 @@ const register = async (req) => {
     name,
     email,
     password: hashedPassword,
-    role,
-    department: role === "STAFF" ? department : null,
   });
 
   const token = jwt.sign(

@@ -1,16 +1,14 @@
-
 const mongoose = require("mongoose");
-
 
 const userschema = mongoose.Schema(
   {
     email: {
       type: String,
-      unique:true
+      unique: true,
     },
-    
-    name:{
-       type: String,
+
+    name: {
+      type: String,
       required: true,
     },
 
@@ -20,18 +18,21 @@ const userschema = mongoose.Schema(
     },
 
     role: {
-  type: String,
-  enum: ["ADMIN", "STAFF"],
-  required: true
-},
+      type: String,
+      enum: ["ADMIN", "STAFF","USER"],
+      default: null,
+    },
 
-department: {
-  type: String,
-  enum: ["Registration department", "Radiology department", "Billing department", "Reports department"],
-  required: function () {
-    return this.role === "STAFF";
-  }
-}
+    department: {
+      type: String,
+      enum: [
+        "Registration department",
+        "Radiology department",
+        "Billing department",
+        "Reports department",
+      ],
+     default: null
+    },
   },
 
   {

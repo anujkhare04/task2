@@ -1,5 +1,4 @@
-const authService=require('../services/Auth Service')
-
+const authService = require("../services/Auth Service");
 
 const registerController = async (req, res, next) => {
   try {
@@ -15,19 +14,17 @@ const registerController = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      data: result
+      data: result,
     });
-  
   } catch (error) {
-    
     next(error);
   }
 };
 
- const loginController = async (req, res, next) => {
+const loginController = async (req, res, next) => {
   try {
     const result = await authService.login(req);
-     
+
     res.cookie("token", result.token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -37,43 +34,34 @@ const registerController = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      data: result
+      data: result,
     });
-
-    
-
-    
-  
   } catch (error) {
     next(error);
   }
 };
 
-
- const logoutController = async (req, res, next) => {
+const logoutController = async (req, res, next) => {
   try {
-
-    // here not need to logout because we not using frontend 
+    // here not need to logout because we not using frontend
 
     res.status(200).json({
       success: true,
-      message: "Logged out successfully"
+      message: "Logged out successfully",
     });
-  
   } catch (error) {
     next(error);
   }
 };
 
-  const profileController = async (req, res, next) => {
+const profileController = async (req, res, next) => {
   try {
     const result = await authService.profile(req);
 
     res.status(200).json({
       success: true,
-      data: result
+      data: result,
     });
-  
   } catch (error) {
     next(error);
   }
@@ -83,5 +71,5 @@ module.exports = {
   registerController,
   loginController,
   logoutController,
-  profileController
+  profileController,
 };
